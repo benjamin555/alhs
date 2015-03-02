@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration  
+PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-config.dtd">  
+<configuration>
+	<plugins>
+		<plugin interceptor="com.homtrip.mybatis.interceptor.PageInterceptor">
+		</plugin>
+	</plugins>
+	<environments default="development">
+	<environment id="development">
+	<transactionManager type="JDBC"/>
+	<dataSource type="POOLED">
+	</dataSource>
+	</environment>
+	</environments> 
+    <mappers>  
+        <mapper resource="mapper/HoteljoinInfoMapper.xml" />  
+        <mapper resource="mapper/CityHotelRelVOMapper.xml" />
+        <mapper resource="mapper/HotelCustomerInfoMapper.xml" />  
+        <mapper resource="mapper/HotelOrderVOMapper.xml" />
+        <mapper resource="mapper/HouseVOMapper.xml" />
+          <mapper resource="mapper/common/CodeItemMapper.xml" />
+            <mapper resource="mapper/HotelCustomerPhotosMapper.xml" />
+        <mapper resource="mapper/HotelCustomerFacilitiesMapper.xml" />
+        <mapper resource="mapper/HotelCustomerPolicyMapper.xml" />
+        <mapper resource="mapper/HotelCustomerGuidepostMapper.xml" />
+        <mapper resource="mapper/HotelCustomerBankInfoMapper.xml" />
+        <mapper resource="mapper/HouseCleanInfoMapper.xml" />
+        <mapper resource="mapper/HouseCleanGrpMenberMapper.xml" />
+        <mapper resource="mapper/HouseCleanGrpMapper.xml" />
+          
+    </mappers>  
+</configuration>  
+

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+    xmlns:p="http://www.springframework.org/schema/p"
+xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/context  
+
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         
+          http://www.springframework.org/schema/mvc 
+
+          http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd" >
+
+
+    <!--spring 组件扫描配置 -->
+
+<context:component-scan base-package="com.homtrip.controller" use-default-filters="false">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+
+	 <context:component-scan base-package="com.homtrip"/>
+	 <mvc:annotation-driven/>
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->  
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>  
+	
+
+    <!-- 配置视图解析器 (该配置的是jstl解析器的一个扩展解析类) -->
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+       <property name="prefix" value="/WEB-INF/hoteljoin/"/>
+
+       <property name="suffix" value=".jsp"/>
+    </bean>
+    
+    
+    <!-- 数据库连接配置文件路径及读取方式 -->  
+    <bean id="propertyConfigurer"  
+       class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="locations">  
+            <list>  
+                <value>classpath:jdbc.properties</value>  
+            </list>  
+        </property>  
+    </bean>  
+  
+   <!--  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+        <property name="driverClassName" value="${jdbc.driverClassName}" />  
+        <property name="url" value="${jdbc.url}" />  
+        <property name="username" value="${jdbc.username}" />  
+        <property name="password" value="${jdbc.password}" />  
+    </bean>   -->
+    
+    <!-- 数据源配置,使用应用内的DBCP数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}"/>
+		<property  name="url"  value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="defaultAutoCommit" value="false" />
+	</bean>
+    
+    
+  
+    <!-- 配置mybatis固定的写法 -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource"/>  
+        <property name="configLocation" value="classpath:sqlMap/SqlMapConfig.xml"/>  
+    </bean>  
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">  
+        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>  
+    </bean>  
+    
+    <!-- 事务管理器配置,单数据源事务 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    
+    
+    <bean id="ComponentFactory" class="com.homtrip.utils.ComponentFactory"  lazy-init="false" />
+    <!-- freemaker -->
+	<bean id="freeMarkerConfigurer"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="classpath:template/ftl"></property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">1800</prop>
+				<prop key="default_encoding">gbk</prop>
+				<prop key="locale">zh_CN</prop>
+			</props>
+		</property>
+	</bean>
+    
+    
+</beans>

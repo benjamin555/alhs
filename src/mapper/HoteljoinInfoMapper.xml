@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">  
+<mapper namespace="com.homtrip.model.HotelJoinVO">  
+
+
+    <insert id="insert" parameterType="com.homtrip.model.HotelJoinVO" useGeneratedKeys="true" keyProperty="id">  
+    <![CDATA[ 
+            insert into qtjzx (guid, sslx, bh, sf, city, qu, address, fzr, mobile, tel, clsj, mc, dh1, dh2, fzrsj, fzrdh, zrr, zrrsj, zrrdh, parentGuid, parentName, sqbmguid, sqbm, password, roomcount, subcount, pcount, wx, wb, email, qq, garden, content, step, logo, kouhao, flag, service, level, passport, jingdu, weidu, paytype, source, status, od) values(#{guid},#{sslx},#{bh},#{sf},#{city},#{qu},#{address},#{fzr},#{mobile},#{tel},#{clsj},#{mc},#{dh1},#{dh2},#{fzrsj},#{fzrdh},#{zrr},#{zrrsj},#{zrrdh},#{parentGuid},#{parentName},#{sqbmguid},#{sqbm},#{password},#{roomcount},#{subcount},#{pcount},#{wx},#{wb},#{email},#{qq},#{garden},#{content},#{step},#{logo},#{kouhao},#{flag},#{service},#{level},#{passport},#{jingdu},#{weidu},#{paytype},#{source},#{status},#{od})
+    ]]>  
+
+    </insert>  
+      
+    <update id="update" parameterType="com.homtrip.model.HotelJoinVO">  
+    <![CDATA[ 
+         UPDATE qtjzx SET STATUS = '0' WHERE guid=#{guid}  
+    ]]>  
+    </update>  
+    
+    <sql id="searchAppend">
+			<if test="bh!=null">
+        	and bh = #{bh}
+        </if>
+        <if test="mobile!=null">
+        	and mobile = #{mobile}
+        </if>
+          <if test="sslx!=null">
+        	and sslx = #{sslx}
+        </if>
+        <if test="clsj!=null">
+        	and clsj = #{clsj}
+        </if>
+        
+        <if test="sf!=null">
+        	and sf = #{sf}
+        </if>
+        
+         <if test="city!=null">
+        	and city = #{city}
+        </if>
+
+   </sql>  
+    
+    <select id="selectPage" resultType="com.homtrip.model.HotelJoinVO">  
+        SELECT * FROM qtjzx  
+        where 1=1 and status=1
+      	<include refid="searchAppend" />
+        
+        limit #{start},#{size} 
+    </select>  
+    
+     <select id="selectCount" resultType="long">  
+        select count(*) from  qtjzx 
+        where 1=1 and status=1
+      <include refid="searchAppend" />
+    </select>  
+    
+    <select id="selectByGuid" resultType="com.homtrip.model.HotelJoinVO">  
+        select * from qtjzx where guid=#{guid}
+    </select> 
+    
+   <!-- 
+      加盟酒店
+    -->
+    
+    <select id="selectcustomerAll" resultType="com.homtrip.model.HotelJoinVO">  
+     
+        SELECT * FROM qtjzx where status=0
+     
+    </select>  
+    
+      <select id="selectcustomerPage" resultType="com.homtrip.model.HotelJoinVO">  
+         SELECT * FROM qtjzx   
+        where 1=1 and status=0
+      	<include refid="searchAppend" />
+        
+        limit #{start},#{size} 
+    </select>  
+    
+     <select id="selectcustomerCount" resultType="long">  
+          select count(*) from  qtjzx 
+        where 1=1 and status=0
+      <include refid="searchAppend" />
+    </select>  
+    
+    <select id="selectcustomerByGuid" resultType="com.homtrip.model.HotelJoinVO">  
+        select * from qtjzx where guid=#{guid} 
+    </select> 
+    
+     <update id="updatecustomer" parameterType="com.homtrip.model.HotelJoinVO">  
+    <![CDATA[ 
+         UPDATE qtjzx SET STATUS = '1' WHERE guid=#{guid}  
+    ]]>  
+    </update> 
+</mapper>  

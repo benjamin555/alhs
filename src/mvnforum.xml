@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<baseElement>
+
+    <adminmoduleconfig>
+<!--
+ Default url pattern for admin, you dont have to change anything here
+ Note: make change to this property is for advanced users only ( if you
+ change this value, you MUST change the value in file web.xml
+-->
+        <url_pattern>/mvnforumadmin</url_pattern>
+    </adminmoduleconfig>
+    <usermoduleconfig>
+        <url_pattern>/mvnforum</url_pattern>
+    </usermoduleconfig>
+    <mvnforumconfig>
+
+<!--
+ NOTE: mvnforum_home is a folder that cannot be accessed from the web,
+       you could create a folder mvnForumHome in your WEB-INF and
+       set mvnforum_home to point to this folder. Please note that the
+       example is for the Windows system, for the *nux system, it look like this:
+       mvnforum_home   = /home/tomcat/mvnForumHome
+-->
+        <mvnforum_home>mvnForumHome</mvnforum_home>
+
+<!-- 
+     NOTE: the mvnforum_log is used to view the log file in Admin area only.
+     You have to config it in its correct place (jlo_logging.xml or log4j.properties)
+-->
+        <mvnforum_log>/log/mvnforum_1.log</mvnforum_log>
+        <webmaster_email>youremail@yourdomain.com</webmaster_email>
+        <logo_url>http://www.mvnForum.com</logo_url>
+        <redirect_login_url>/login</redirect_login_url>
+
+        <supported_locales>en;vi;ru;zh_CN;zh_TW;es;fr;it;de;da;lv;sr;sh;si;nl;ar;ko;pt_BR;ja;el;tr;no;bg</supported_locales>
+        <default_locale_name>zh_CN</default_locale_name>
+        <locale_parameter_name>lang</locale_parameter_name>
+<!--
+ NOTE: default_guest_name: set default name of a virtual Guest user.
+       IMPORTANT: It will be overriden with the data from the database, if it exists (for the Guest user).
+-->
+        <default_guest_name>Guest</default_guest_name>
+        <default_guest_timezone>0</default_guest_timezone>
+
+        <enable_portlet>false</enable_portlet> 
+
+        <enable_cache_member>false</enable_cache_member>
+        <enable_cache_post>true</enable_cache_post>
+        <enable_cache_thread>true</enable_cache_thread>
+        <enable_cache_forum>true</enable_cache_forum>
+        <enable_cache_category>true</enable_cache_category>
+
+<!--
+ NOTE: enable_passwordless_auth is not supported and should be false
+-->
+        <enable_passwordless_auth>false</enable_passwordless_auth>
+        <enable_login_info_in_cookie>true</enable_login_info_in_cookie>
+        <enable_login_info_in_session>true</enable_login_info_in_session>
+        <enable_login_info_in_realm>false</enable_login_info_in_realm>
+        <enable_login_info_in_customization>false</enable_login_info_in_customization>
+
+        <require_activation>false</require_activation>
+
+        <enable_search>true</enable_search>
+        <enable_login>true</enable_login>
+        <enable_new_member>true</enable_new_member>
+        <enable_new_post>true</enable_new_post>
+        <enable_rss>true</enable_rss>
+        <enable_watch>true</enable_watch>
+        <enable_attachment>true</enable_attachment>
+        <enable_avatar>true</enable_avatar>
+        <enable_emoticon>true</enable_emoticon>
+        <enable_captcha>true</enable_captcha>
+        <enable_listmembers>true</enable_listmembers>
+        <enable_show_last_login>true</enable_show_last_login>
+        <enable_admin_can_change_password>true</enable_admin_can_change_password>
+
+        <enable_online_users>true</enable_online_users>
+
+        <!-- if enable this option, duplicate online users will be shown (as in RC3 and before) 
+             if disable it, then the online user will be shown only once with the number of his session
+        -->
+        <enable_duplicate_onlineusers>true</enable_duplicate_onlineusers>
+        <enable_invisible_users>true</enable_invisible_users>
+
+        <enable_private_message>true</enable_private_message>
+
+        <!-- If this option is enabled, Only user with permission AdminSystem
+             can send a message to all registered users in the forum.
+         -->
+        <enable_public_message>true</enable_public_message>
+        
+        <enable_message_attachment>true</enable_message_attachment>
+
+        <!-- if enable this option, then guest and all users can always view image attachment -->
+        <enable_guest_view_image_attachment>false</enable_guest_view_image_attachment>
+
+        <!-- If enabling, show the most active threads/members on index page and list forums-->
+        <enable_most_active_threads>true</enable_most_active_threads>
+        <enable_most_active_members>true</enable_most_active_members>
+        <enable_site_statistics_overview>true</enable_site_statistics_overview>
+        
+        <!-- if equals false, then use RC2-style (like listforums) index page -->
+        <enable_portal_like_index_page>false</enable_portal_like_index_page> 
+
+<!--
+ Set the default watch option:
+ 1 : live watch
+ 2 : hourly watch
+ 0 or 3 : daily watch
+ 4 : weekly watch
+-->
+        <default_watch_option>0</default_watch_option>
+
+<!--
+ Set the default moderation option:
+ 0 or 1 : no moderation
+ 2 : thread and post moderation
+ 3 : thread only moderation
+ 4 : post only moderation
+-->
+        <default_moderation_option>0</default_moderation_option>
+
+<!--
+ NOTE: max_attachment_size : set the maximum attachment file size
+       max_attachment_size = -1  means no limit on the attachment file size
+       You can use suffixes "K" or "KB" to specify the size in kilobytes,
+       "M" or "MB" to specify it in megabytes. Otherwise, the size is in bytes.
+       Example: max_attachment_size = 1024 : maximum size is 1024 bytes = 1 KB
+       Example: max_attachment_size = 1KB  : same as previous
+-->
+        <max_attachment_size>4096K</max_attachment_size>
+
+        <max_message_attachment_size>1024</max_message_attachment_size>
+
+        <max_favorite_thread>100</max_favorite_thread>
+        <max_private_message>100</max_private_message>
+        <max_edit_days>3</max_edit_days>
+        <max_attach_days>1</max_attach_days>
+        <max_delete_days>1</max_delete_days>
+        <rows_per_page>8</rows_per_page>
+        <rows_per_rss>15</rows_per_rss>
+        <hot_topic_threshold>10</hot_topic_threshold>
+
+        <max_chars_in_short_summary>100</max_chars_in_short_summary>
+        <max_chars_in_long_summary>1000</max_chars_in_long_summary>
+        <max_chars_in_rss>400</max_chars_in_rss>
+
+<!--
+These 2 below values will prevent flooding per IP per hour
+If set to 0, it means no limit
+Ex: a computer (IP) can register maximum 2 account per hour
+-->
+        <max_posts_per_hour>20</max_posts_per_hour>
+        <max_members_per_hour>2</max_members_per_hour>
+        <max_logins_per_hour>5</max_logins_per_hour>
+        <max_messages_per_hour>5</max_messages_per_hour>
+<!--
+ NOTE: max_import_size: set the maximum import file size
+       max_import_size = -1  means no limit on the import file size
+       You can use suffixes "K" or "KB" to specify the size in kilobytes,
+       "M" or "MB" to specify it in megabytes. Otherwise, the size is in bytes.
+       Example: max_import_size = 1MB      : maximum size is 1 MB = 1024 KB
+
+ NOTE: To disable storing backup files on server, set ENABLE_BACKUP_ON_SERVER = false
+       In the current release, this parameter is ignored (always true).
+-->
+        <enable_backup_on_server>true</enable_backup_on_server>
+        <max_import_size>4096000</max_import_size>
+    </mvnforumconfig>
+
+    <mvnforumfactoryconfig>
+        <member_implementation>com.mvnforum.db.jdbc.MemberDAOImplJDBC</member_implementation>
+        <onlineuser_implementation>com.mvnforum.auth.OnlineUserFactoryImpl</onlineuser_implementation>
+        <authenticator_implementation/>
+        <requestprocessor_implementation>com.mvnforum.RequestProcessorDefault</requestprocessor_implementation>
+        <lucene_analyzer_implementation>org.apache.lucene.analysis.standard.StandardAnalyzer</lucene_analyzer_implementation>
+        <binarystorage_implementation>com.mvnforum.impl.BinaryStorageImplDisk</binarystorage_implementation>
+    </mvnforumfactoryconfig>
+</baseElement>

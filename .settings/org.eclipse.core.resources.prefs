@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//defaultroot/WEB-INF/hoteljoin/intentCustomer.html=GBK
+encoding//defaultroot/WEB-INF/hoteljoin/intentCustomer_left.html=GBK
+encoding//defaultroot/WEB-INF/hoteljoin/intentCustomer_right.html=GBK
+encoding//defaultroot/WEB-INF/hoteljoin/joinCustomer.html=GBK
+encoding//defaultroot/WEB-INF/hoteljoin/joinCustomer_left.html=GBK
+encoding//defaultroot/WEB-INF/hoteljoin/joinCustomer_right.html=GBK
+encoding//defaultroot/alhs/alhs.js=UTF-8
+encoding//defaultroot/alhs/calender/salestatus.js=gbk
+encoding//defaultroot/idcard/idcard.js=gbk
+encoding//src/jdbc.properties=GBK
+encoding/<project>=GBK
+encoding/src=GBK
+encoding/test=GBK

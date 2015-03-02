@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.homtrip.model.CityHotelRelVO">
+
+
+	<insert id="insert" parameterType="com.homtrip.model.CityHotelRelVO"
+		useGeneratedKeys="true" keyProperty="id">  
+    <![CDATA[ 
+       insert into city_hotel_rel (id,province,city,type,subway,landmark,longitude,latitude) values(#{id},#{province},#{city},#{type},#{subway},#{landmark},#{longitude},#{latitude})
+    ]]>
+	</insert>
+
+	<update id="update" parameterType="com.homtrip.model.CityHotelRelVO">  
+    <![CDATA[ 
+        update city_hotel_rel
+    set province = #{province:VARCHAR},
+      city = #{city:VARCHAR},
+      type = #{type:VARCHAR},
+      subway = #{subway:VARCHAR},
+      landmark = #{landmark:VARCHAR},
+      longitude = #{longitude:VARCHAR},
+      latitude = #{latitude:VARCHAR}
+    where id = #{id:INTEGER}
+    ]]>
+	</update>
+
+	<sql id="Base_Column_List">
+		id, province, city, type, subway, landmark, longitude, latitude
+	</sql>
+
+	<sql id="Where_Clause">
+		<if test="id!=null">
+        	and id = #{id}
+        </if>
+        <if test="province!=null">
+        	and province = #{province}
+        </if>
+          <if test="city!=null">
+        	and city = #{city}
+        </if>
+        <if test="type!=null">
+        	and type = #{type}
+        </if>
+        
+        <if test="subway!=null">
+        	and subway = #{subway}
+        </if>
+        
+         <if test="landmark!=null">
+        	and landmark = #{landmark}
+        </if>
+        
+          <if test="longitude!=null">
+        	and longitude = #{longitude}
+        </if>
+        
+          <if test="latitude!=null">
+        	and latitude = #{latitude}
+        </if>
+	
+	</sql>
+
+	<select id="selectPage" resultType="com.homtrip.model.CityHotelRelVO">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM city_hotel_rel
+		where 1=1
+		<include refid="Where_Clause" />
+		order by id desc
+		limit #{start},#{size}
+		
+		
+	</select>
+
+	<select id="selectCount" resultType="long">
+		select count(*) from city_hotel_rel
+		where 1=1
+		<include refid="Where_Clause" />
+	</select>
+	
+	
+<delete id="deleteByPrimaryKey" parameterType="com.homtrip.model.CityHotelRelVO" >
+    delete from city_hotel_rel
+    where id = #{id:INTEGER}
+  </delete>
+
+</mapper>  
